@@ -12,6 +12,7 @@ module DirtyCoastPickup
     config.load_defaults 6.0
 
     config.hosts << "f643abca946c.ngrok.io"
+    config.hosts << "dirty-coast-pickup.herokuapp.com"
 
     ShopifyAPI::Base.site = "https://#{ENV["API_KEY"]}:#{ENV["PASSWORD"]}@#{ENV["SHOPIFY_URL"]}/admin"
     ShopifyAPI::Base.api_version = '2020-04'
