@@ -1,0 +1,11 @@
+<h2>Shipping or Pickup: <%= @shipping_or_pickup %></h2>
+<% if @shipping_or_pickup == "Local Pickup" %>
+  <p>Shipping or Pickup: <%= @pickup_address %></p>
+<% end %>
+<br>
+<% for item in @line_items %>
+  <h4><%= item["title"] %></h4>
+  Price: <%= item["price"] %><br>
+  Variant id: <%= item["variant_id"] %><br>
+  Quantity: <%= item["quantity"] %>
+<% end %>
