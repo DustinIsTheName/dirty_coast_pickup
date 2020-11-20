@@ -11,8 +11,14 @@ module DirtyCoastPickup
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    config.hosts << "f643abca946c.ngrok.io"
+    config.hosts << "22bec47d5bc3.ngrok.io"
     config.hosts << "dirty-coast-pickup.herokuapp.com"
+
+    config.action_mailer.delivery_method = :postmark
+
+    config.action_mailer.postmark_settings = {
+      api_token: Rails.application.credentials.postmark_api_token
+    }
 
     ShopifyAPI::Base.site = "https://#{ENV["API_KEY"]}:#{ENV["PASSWORD"]}@#{ENV["SHOPIFY_URL"]}/admin"
     ShopifyAPI::Base.api_version = '2020-04'

@@ -1,4 +1,5 @@
 class PickupMailer < ApplicationMailer
+  default from: 'contact@dirtycoast.com'
 
   def checkout(params)
     @line_items = params["line_items"]
@@ -7,12 +8,29 @@ class PickupMailer < ApplicationMailer
     @pickup_address = params["pickup_address"]
 
     if Rails.env.development? or ENV["TESTING"] == 'testing'
-      address = "dustin@wittycreative.com"
+      if ENV["TESTING"] == 'testing'
+        address = ENV["TESTING_ADDRESS"] ? ENV["TESTING_ADDRESS"] : "dustin@wittycreative.com"
+        from = ENV["TESTING_FROM"] ? ENV["TESTING_FROM"] : "dustin@wittycreative.com"
+      else
+        address = "dustin@wittycreative.com"
+        from = "dustin@wittycreative.com"
+      end
+      # address = 'test@blackhole.postmarkapp.com'
     else
-      address = "shipping@dirtycoast.com"
+      address = ENV["ADDRESS"] ? ENV["ADDRESS"] : "shipping@dirtycoast.com"
+      from = ENV["FROM"] ? ENV["FROM"] : "contact@dirtycoast.com"
     end
 
-    mail(to: address, subject: "Checkout created")
+    mail(to: address, from: from, subject: "Checkout created")
+  end
+
+  def test
+    mail(
+      subject: 'Hello from Postmark',
+      to: "dustin@wittycreative.com",
+      from: 'dustin@wittycreative.com',
+      html_body: '<strong>Hello</strong> dear Postmark user.',
+      message_stream: 'outbound')
   end
 
 end
