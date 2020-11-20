@@ -14,17 +14,20 @@ class PickupMailer < ApplicationMailer
       if ENV["TESTING"] == 'testing'
         address = ENV["TESTING_ADDRESS"] ? ENV["TESTING_ADDRESS"] : "dustin@wittycreative.com"
         from = ENV["TESTING_FROM"] ? ENV["TESTING_FROM"] : "dustin@wittycreative.com"
+        reply_to = @email
       else
         address = "dustin@wittycreative.com"
         from = "dustin@wittycreative.com"
+        reply_to = @email
       end
       # address = 'test@blackhole.postmarkapp.com'
     else
       address = ENV["ADDRESS"] ? ENV["ADDRESS"] : "shipping@dirtycoast.com"
       from = ENV["FROM"] ? ENV["FROM"] : "contact@dirtycoast.com"
+      reply_to = @email
     end
 
-    mail(to: address, from: from, subject: "Checkout created")
+    mail(to: address, reply_to: reply_to, from: from, subject: "Checkout created")
   end
 
   def test
