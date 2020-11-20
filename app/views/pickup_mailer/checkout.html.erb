@@ -3,6 +3,8 @@
   <p>Pickup Address: <%= @pickup_address %></p>
 <% end %>
 <br>
+<h4>Name: <%= @name %></h4>
+<h4>Email: <%= @email %></h4>
 <% for item in @line_items %>
   <h4><%= item["title"] %></h4>
   Price: <%= item["price"] %><br>

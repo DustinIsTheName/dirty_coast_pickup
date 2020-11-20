@@ -7,6 +7,9 @@ class PickupMailer < ApplicationMailer
     @shipping_or_pickup = params["shipping_or_pickup"]
     @pickup_address = params["pickup_address"]
 
+    @name = params["name"]
+    @email = params["email"]
+
     if Rails.env.development? or ENV["TESTING"] == 'testing'
       if ENV["TESTING"] == 'testing'
         address = ENV["TESTING_ADDRESS"] ? ENV["TESTING_ADDRESS"] : "dustin@wittycreative.com"
