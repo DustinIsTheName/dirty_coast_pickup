@@ -27,7 +27,7 @@ class PickupMailer < ApplicationMailer
       reply_to = @email
     end
 
-    mail(to: address, reply_to: reply_to, from: from, subject: "Checkout created")
+    mail(to: address, reply_to: reply_to, from: from, subject: "Local Pickup Order Submitted - #{@name}")
   end
 
   def test
