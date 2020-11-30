@@ -22,7 +22,7 @@ class PickupController < ApplicationController
       if shipping_or_pickup
         if shipping_or_pickup["value"] == "Local Pickup"
           puts Colorize.green("added Local Pickup tag")
-          order.tags = "pickup-order"
+          order.tags = "Local Pickup"
           if pickup_address
             order.tags << ", #{pickup_address["value"]}"
           end
