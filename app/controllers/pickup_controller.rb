@@ -12,20 +12,33 @@ class PickupController < ApplicationController
   end
 
   def order_webhook
-    order = ShopifyAPI::Order.find params["id"]
-    puts params
+    begin
+      order = ShopifyAPI::Order.find params["id"]
+      puts params
 
-    shipping_or_pickup = params["note_attributes"].select{|a| a["name"] == "shipping_or_pickup"}.first
-    pickup_address = params["note_attributes"].select{|a| a["name"] == "pickup_address"}.first
+      shipping_or_pickup = params["note_attributes"].select{|a| a["name"] == "shipping_or_pickup"}.first
+      pickup_address = params["note_attributes"].select{|a| a["name"] == "pickup_address"}.first
 
-    if shipping_or_pickup
-      if shipping_or_pickup["value"] == "Local Pickup"
-        order.tags = "pickup-order"
-        if pickup_address
-          order.tags << ", #{pickup_address["value"]}"
+      if shipping_or_pickup
+        if shipping_or_pickup["value"] == "Local Pickup"
+          puts Colorize.green("added Local Pickup tag")
+          order.tags = "pickup-order"
+          if pickup_address
+            order.tags << ", #{pickup_address["value"]}"
+          end
+        else
+          puts Colorize.cyan("Not a Local Pickup")
         end
+        if order.save
+          puts Colorize.green "order saved"
+        else
+          puts Colorize.red "#{order.errors.messages}"
+        end
+      else
+        puts Colorize.cyan("Not a Local Pickup")
       end
-      order.save
+    rescue
+      puts Colorize.red("Product Not Found")
     end
 
     head :ok, content_type: "text/html"
