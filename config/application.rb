@@ -8,7 +8,7 @@ Bundler.require(*Rails.groups)
 
 module DirtyCoastPickup
   class Application < Rails::Application
-    # Initialize configuration defaults for originally generated Rails version.
+    # Initialize configuration defaults for originally generated Rails version..
     config.load_defaults 6.0
 
     config.hosts << "e430-2600-387-3-805-00-62.ngrok.io"
