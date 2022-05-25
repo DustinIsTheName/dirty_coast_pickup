@@ -11,7 +11,7 @@ module DirtyCoastPickup
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.0
 
-    config.hosts << "22bec47d5bc3.ngrok.io"
+    config.hosts << "e430-2600-387-3-805-00-62.ngrok.io"
     config.hosts << "dirty-coast-pickup.herokuapp.com"
 
     config.action_mailer.delivery_method = :postmark

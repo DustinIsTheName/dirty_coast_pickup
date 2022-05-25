@@ -25,6 +25,14 @@ class PickupController < ApplicationController
           order.tags = "Local Pickup"
           if pickup_address
             order.tags << ", #{pickup_address["value"]}"
+            case pickup_address["value"]
+            when "5631 Magazine St."
+              order.tags << ", uptown"
+            when "1320 Magazine St."
+              order.tags << ", lowergarden"
+            when "713 Royal St."
+              order.tags << ", frenchquarter"
+            end
           end
         else
           puts Colorize.cyan("Not a Local Pickup")
